@@ -46,8 +46,10 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().
                 authorizeRequests()
-                .antMatchers("/api/login/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/api/**")
+
+                .permitAll()
+              /*  .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
                 .headers()
@@ -55,7 +57,7 @@ public class SecurityConfig {
                 .and()
                 .contentSecurityPolicy(
                         "default-src 'self'; script-src 'self'; style-src 'self'; form-action 'self';"
-                );
+                )*/;
 
 
         return http.build();

@@ -1,0 +1,51 @@
+spring:
+  profile:
+    active: ${PROFILE}
+  application:
+    name: Enterprise
+
+  datasource:
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.PostgreSQLDialect"
+        format_sql: true
+  mvc:
+    format:
+      date-time: iso
+
+  liquibase:
+    enabled: true
+    change-log: "classpath:/liquibase/changelog-master.yaml"
+
+  servlet:
+    multipart:
+      max-file-size: ${MAX_FILE_SIZE}
+      max-request-size: ${MAX_REQUEST_SIZE}
+server:
+  port: ${SERVER_PORT}
+
+debug: false
+
+logging:
+  level:
+    # liquibase: INFO
+    org:
+      springframework: INFO
+    com:
+      knits:
+        enterprise: DEBUG
+
+edm:
+  secret: ${JWT_SECRET}
+  issuer: "Enterprise Data Management System"
+  jwt-expiration-millis: ${JWT_EXPIRATION}
+  init-data: true

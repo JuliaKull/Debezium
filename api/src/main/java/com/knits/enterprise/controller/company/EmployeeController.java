@@ -39,14 +39,14 @@ public class EmployeeController {
     }
 
     @PatchMapping(value = "/employees", produces = {"application/json"}, consumes = {"application/json"})
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable(value = "id") @RequestBody EmployeeDto employeeDto) {
+    public ResponseEntity<EmployeeDto> updateEmployee(@RequestBody EmployeeDto employeeDto) {
         EmployeeDto employeeFound = employeeService.partialUpdate(employeeDto);
         return ResponseEntity
                 .ok()
                 .body(employeeFound);
     }
 
-    @PutMapping(value = "/employees", produces = {"application/json"})
+    @DeleteMapping(value = "/employees", produces = {"application/json"})
     public ResponseEntity<Long> deleteEmployee(@PathVariable(value = "id") final Long id) {
         log.debug("REST request to delete Employee : {}", id);
         employeeService.deleteEmployee(id);
