@@ -1,0 +1,1 @@
+insert into role (id,name,active) values (1, 'Admin', true);
