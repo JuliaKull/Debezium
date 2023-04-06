@@ -14,7 +14,7 @@ public class DebeziumConnectorConfig {
         return io.debezium.config.Configuration.create()
                 .with("connector.class", "io.debezium.connector.postgresql.PostgresConnector")
                 .with("offset.storage",  "org.apache.kafka.connect.storage.FileOffsetBackingStore")
-                .with("offset.storage.file.filename", "/path/cdc/offset/employee-offset.dat")
+                .with("offset.storage.file.filename", "C:/Users/Yuliya/AppData/Local/Temp/connect.offsets")
                 .with("offset.flush.interval.ms", 60000)
                 .with("name", "postgres-connector")
                 .with("database.server.name", "employee")

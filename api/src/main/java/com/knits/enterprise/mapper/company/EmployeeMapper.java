@@ -26,6 +26,8 @@ public interface EmployeeMapper extends EntityMapper<Employee, EmployeeDto> {
     @Mapping(source = "startDate", target = "startDate", dateFormat = Constants.DATE_FORMAT_DD_MM_YYYY)
     @Mapping(source = "endDate", target = "endDate", dateFormat = Constants.DATE_FORMAT_DD_MM_YYYY)
     @Mapping(target = "solidLineManager", ignore = true)
+    @Mapping(target = "companyPhone", ignore = true)
+    @Mapping(target = "companyMobileNumber", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     EmployeeDto toDto(Employee entity);
 
@@ -34,6 +36,8 @@ public interface EmployeeMapper extends EntityMapper<Employee, EmployeeDto> {
     @Mapping(source = "startDate", target = "startDate", dateFormat = Constants.DATE_FORMAT_DD_MM_YYYY)
     @Mapping(source = "endDate", target = "endDate", dateFormat = Constants.DATE_FORMAT_DD_MM_YYYY)
     @Mapping(target = "solidLineManager", ignore = true)
+    @Mapping(target = "companyPhone", ignore = true)
+    @Mapping(target = "companyMobileNumber", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Employee toEntity(EmployeeDto dto);
 
@@ -42,6 +46,8 @@ public interface EmployeeMapper extends EntityMapper<Employee, EmployeeDto> {
     @Mapping(source = "startDate", target = "startDate", dateFormat = Constants.DATE_FORMAT_DD_MM_YYYY)
     @Mapping(source = "endDate", target = "endDate", dateFormat = Constants.DATE_FORMAT_DD_MM_YYYY)
     @Mapping(target = "solidLineManager", ignore = true)
+    @Mapping(target = "companyPhone", ignore = true)
+    @Mapping(target = "companyMobileNumber", ignore = true)
     @IterableMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
     List<Employee> toEntities(List<EmployeeDto> entityList);
 

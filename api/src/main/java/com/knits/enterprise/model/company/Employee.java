@@ -1,13 +1,12 @@
 package com.knits.enterprise.model.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.knits.enterprise.model.common.AbstractActiveEntity;
 import com.knits.enterprise.model.common.Organization;
 import com.knits.enterprise.model.enums.Gender;
 import com.knits.enterprise.model.location.Location;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -48,6 +47,7 @@ public class Employee extends AbstractActiveEntity implements Serializable {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @JsonProperty("company_phone")
     @Column(name = "company_phone", nullable = false)
     private String companyPhone;
 
