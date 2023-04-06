@@ -425,4 +425,15 @@
     <changeSet author="stefano.fiorenza (generated)" id="1679414984807-50">
         <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="location" constraintName="fkt8psi9b5mkkfc0r9fgptngwhg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address" validate="true"/>
     </changeSet>
+    <changeSet author="stefano.fiorenza (generated)" id="1679414984807-51">
+        <createTable tableName="employee_change_set">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="employee_change_set_pkey"/>
+            </column>
+            <column name="employee_id" type="BIGINT"/>
+            <column name="field_name" type="VARCHAR(255)"/>
+            <column name="previous_value" type="VARCHAR(255)"/>
+            <column name="new_value" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
