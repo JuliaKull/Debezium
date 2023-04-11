@@ -67,24 +67,27 @@ public class DebeziumListener {
                         .filter(fieldName -> struct.get(fieldName) != null)
                         .map(fieldName -> Pair.of(fieldName, struct.get(fieldName)))
                         .collect(toMap(Pair::getKey, Pair::getValue));
-
                 try {
-                    DebeziumChangeEvent<JsonNode, JsonNode> changeEvent = new DebeziumChangeEvent<>(
-                            sourceRecord.topic(),
-                            sourceRecord.kafkaPartition(),
-                            sourceRecord.keySchema(),
-                            sourceRecord.key(),
-                            sourceRecord.valueSchema(),
-                            objectMapper.readTree(objectMapper.writeValueAsString(payload)),
-                            sourceRecord.timestamp(),
-                            sourceRecord.headers()
-                    );
-
-                    processChangeData(changeEvent);
-                } catch (ParseException | JsonProcessingException e) {
+                    this.employeeService.replicateData(payload, operation);
+                } catch (ParseException e) {
+//                try {
+//                    DebeziumChangeEvent<JsonNode, JsonNode> changeEvent = new DebeziumChangeEvent<>(
+//                            sourceRecord.topic(),
+//                            sourceRecord.kafkaPartition(),
+//                            sourceRecord.keySchema(),
+//                            sourceRecord.key(),
+//                            sourceRecord.valueSchema(),
+//                            objectMapper.readTree(objectMapper.writeValueAsString(payload)),
+//                            sourceRecord.timestamp(),
+//                            sourceRecord.headers()
+//                    );
+//
+//                    processChangeData(changeEvent);
+//                } catch (ParseException | JsonProcessingException e) {
+//                    throw new RuntimeException(e);
+//                }
                     throw new RuntimeException(e);
                 }
-
                 log.info("Updated Data: {} with Operation: {}", payload, operation.name());
             }
         }}
