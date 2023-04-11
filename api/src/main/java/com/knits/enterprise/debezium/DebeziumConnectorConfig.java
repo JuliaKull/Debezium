@@ -26,17 +26,7 @@ public class DebeziumConnectorConfig {
                 .with("database.dbname", "postgres")
                 .with("plugin.name", "pgoutput")
                 .with("table.whitelist", "public.employee")
-                .with("transforms", "unwrap")
-                .with("transforms.unwrap.type", "io.debezium.transforms.ExtractNewRecordState")
-                .with("transforms.unwrap.drop.tombstones", "false")
-                .with("transforms.unwrap.delete.handling.mode", "rewrite")
-                .with("transforms.unwrap.add.fields.start_date.field", "startDate")
-                .with("transforms.unwrap.add.fields.start_date.type", "io.debezium.time.Date")
-                .with("transforms.unwrap.add.fields.birth_date.field", "birthDate")
-                .with("transforms.unwrap.add.fields.birth_date.type", "io.debezium.time.Date")
-                .with("transforms.unwrap.add.fields.end_date.field", "endDate")
-                .with("transforms.unwrap.add.fields.end_date.type", "io.debezium.time.Date")
-                .with("time.precision.mode", "connect")
+                .with("time.precision.mode", "adaptive")
                 .build();
     }
 

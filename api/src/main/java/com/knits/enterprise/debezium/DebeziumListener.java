@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -57,7 +58,7 @@ public class DebeziumListener {
             Operation operation = Operation.forCode((String) sourceRecordChangeValue.get(OPERATION));
 
             if(operation != Operation.READ) {
-                String record = operation == Operation.DELETE ? BEFORE : AFTER; // Handling Update & Insert operations.
+                String record = operation == Operation.DELETE ? BEFORE : AFTER;
 
                 Struct struct = (Struct) sourceRecordChangeValue.get(record);
                 Map<String, Object> payload = struct.schema().fields().stream()
@@ -66,7 +67,11 @@ public class DebeziumListener {
                         .map(fieldName -> Pair.of(fieldName, struct.get(fieldName)))
                         .collect(toMap(Pair::getKey, Pair::getValue));
 
-                this.employeeService.replicateData(payload, operation);
+                try {
+                    this.employeeService.replicateData(payload, operation);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 log.info("Updated Data: {} with Operation: {}", payload, operation.name());
             }
         }

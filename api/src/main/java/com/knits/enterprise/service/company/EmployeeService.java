@@ -1,6 +1,7 @@
 package com.knits.enterprise.service.company;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.knits.enterprise.dto.api.PaginatedResponseDto;
 import com.knits.enterprise.dto.data.company.EmployeeDto;
@@ -10,18 +11,22 @@ import com.knits.enterprise.mapper.company.EmployeeMapper;
 import com.knits.enterprise.model.common.Organization;
 import com.knits.enterprise.model.company.*;
 import com.knits.enterprise.model.location.Location;
-import com.knits.enterprise.repository.common.ContactRepository;
 import com.knits.enterprise.repository.company.*;
 import com.knits.enterprise.repository.location.LocationRepository;
 import io.debezium.data.Envelope;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static io.debezium.data.Envelope.Operation.DELETE;
@@ -110,18 +115,15 @@ public class EmployeeService {
     }
 
 
-    public void replicateData(Map<String, Object> payload, Envelope.Operation operation) {
+    public void replicateData(Map<String, Object> payload, Envelope.Operation operation) throws ParseException {
         final ObjectMapper mapper = new ObjectMapper();
         final Employee employee = mapper.convertValue(payload, Employee.class);
-
         if (DELETE == operation) {
             employeeRepository.deleteById(employee.getId());
         } else {
             employeeRepository.save(employee);
         }
     }
-
-
 }
 
 

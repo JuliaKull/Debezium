@@ -1,7 +1,8 @@
 package com.knits.enterprise.model.company;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.knits.enterprise.config.EmployeeDeserializer;
 import com.knits.enterprise.model.common.AbstractActiveEntity;
 import com.knits.enterprise.model.common.Organization;
 import com.knits.enterprise.model.enums.Gender;
@@ -20,6 +21,7 @@ import java.util.Set;
 @SuperBuilder(toBuilder=true)
 @Table(name = "employee")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+@JsonDeserialize(using = EmployeeDeserializer.class)
 public class Employee extends AbstractActiveEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
