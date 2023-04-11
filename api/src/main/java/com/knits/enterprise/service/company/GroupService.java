@@ -54,7 +54,7 @@ public class GroupService extends GenericService {
         }
         Group group = groupMapper.toEntity(groupDto);
         group.setCreatedBy(getCurrentUserAsEntity());
-        group.setStartDate(LocalDate.now());
+        group.setStartDate(LocalDateTime.now());
         group.setActive(true);
         return groupMapper.toDto(groupRepository.save(group));
     }

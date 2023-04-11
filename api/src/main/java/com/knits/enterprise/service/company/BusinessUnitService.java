@@ -39,7 +39,7 @@ public class BusinessUnitService extends GenericService {
         }
         BusinessUnit businessUnit = mapper.toEntity(businessUnitDto);
         businessUnit.setCreatedBy(getCurrentUserAsEntity());
-        businessUnit.setStartDate(LocalDate.now());
+        businessUnit.setStartDate(LocalDateTime.now());
         businessUnit.setActive(true);
         return mapper.toDto(repository.save(businessUnit));
     }

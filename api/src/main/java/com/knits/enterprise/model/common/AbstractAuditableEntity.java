@@ -20,10 +20,10 @@ public abstract class AbstractAuditableEntity extends AbstractActiveEntity imple
     private static final long serialVersionUID = 1L;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by", nullable = false)

@@ -40,7 +40,7 @@ public class TeamService extends GenericService {
 
         Team team = mapper.toEntity(teamDto);
         team.setCreatedBy(getCurrentUserAsEntity());
-        team.setStartDate(LocalDate.now());
+        team.setStartDate(LocalDateTime.now());
         team.setActive(true);
 
         return mapper.toDto(repository.save(team));

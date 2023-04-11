@@ -37,7 +37,7 @@ public class CostCenterService extends GenericService {
         }
         CostCenter costCenter = mapper.toEntity(costCenterDto);
         costCenter.setCreatedBy(getCurrentUserAsEntity());
-        costCenter.setStartDate(LocalDate.now());
+        costCenter.setStartDate(LocalDateTime.now());
         costCenter.setActive(true);
         return mapper.toDto(repository.save(costCenter));
     }

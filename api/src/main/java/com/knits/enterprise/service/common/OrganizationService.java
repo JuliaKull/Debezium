@@ -42,7 +42,7 @@ public class OrganizationService extends GenericService{
 
         Organization organization = mapper.toEntity(organizationDto);
         organization.setCreatedBy(getCurrentUserAsEntity());
-        organization.setStartDate(LocalDate.now());
+        organization.setStartDate(LocalDateTime.now());
         organization.setActive(true);
         return mapper.toDto(repository.save(organization));
     }

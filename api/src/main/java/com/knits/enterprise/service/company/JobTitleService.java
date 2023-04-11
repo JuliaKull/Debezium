@@ -48,7 +48,7 @@ public class JobTitleService extends GenericService {
 
         JobTitle jobTitle = mapper.toEntity(jobTitleDto);
         jobTitle.setCreatedBy(getCurrentUserAsEntity());
-        jobTitle.setStartDate(LocalDate.now());
+        jobTitle.setStartDate(LocalDateTime.now());
         jobTitle.setActive(true);
         return mapper.toDto(repository.save(jobTitle));
     }

@@ -37,7 +37,7 @@ public class DivisionService extends GenericService {
         }
         Division division = mapper.toEntity(divisionDto);
         division.setCreatedBy(getCurrentUserAsEntity());
-        division.setStartDate(LocalDate.now());
+        division.setStartDate(LocalDateTime.now());
         division.setActive(true);
         return mapper.toDto(repository.save(division));
     }

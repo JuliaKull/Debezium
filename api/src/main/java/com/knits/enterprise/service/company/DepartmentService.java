@@ -37,7 +37,7 @@ public class DepartmentService extends GenericService {
         }
         Department department = mapper.toEntity(departmentDto);
         department.setCreatedBy(getCurrentUserAsEntity());
-        department.setStartDate(LocalDate.now());
+        department.setStartDate(LocalDateTime.now());
         department.setActive(true);
         return mapper.toDto(repository.save(department));
     }
