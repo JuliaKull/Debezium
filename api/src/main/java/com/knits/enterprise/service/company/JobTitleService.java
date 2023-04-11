@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class JobTitleService extends GenericService {
 
         JobTitle jobTitle = mapper.toEntity(jobTitleDto);
         jobTitle.setCreatedBy(getCurrentUserAsEntity());
-        jobTitle.setStartDate(LocalDateTime.now());
+        jobTitle.setStartDate(LocalDate.now());
         jobTitle.setActive(true);
         return mapper.toDto(repository.save(jobTitle));
     }

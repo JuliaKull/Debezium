@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class OrganizationService extends GenericService{
 
         Organization organization = mapper.toEntity(organizationDto);
         organization.setCreatedBy(getCurrentUserAsEntity());
-        organization.setStartDate(LocalDateTime.now());
+        organization.setStartDate(LocalDate.now());
         organization.setActive(true);
         return mapper.toDto(repository.save(organization));
     }

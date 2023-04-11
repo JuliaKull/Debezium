@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import static java.lang.String.format;
@@ -36,7 +37,7 @@ public class DepartmentService extends GenericService {
         }
         Department department = mapper.toEntity(departmentDto);
         department.setCreatedBy(getCurrentUserAsEntity());
-        department.setStartDate(LocalDateTime.now());
+        department.setStartDate(LocalDate.now());
         department.setActive(true);
         return mapper.toDto(repository.save(department));
     }

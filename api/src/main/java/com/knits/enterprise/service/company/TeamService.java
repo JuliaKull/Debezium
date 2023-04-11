@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import static java.lang.String.format;
@@ -39,7 +40,7 @@ public class TeamService extends GenericService {
 
         Team team = mapper.toEntity(teamDto);
         team.setCreatedBy(getCurrentUserAsEntity());
-        team.setStartDate(LocalDateTime.now());
+        team.setStartDate(LocalDate.now());
         team.setActive(true);
 
         return mapper.toDto(repository.save(team));

@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import static java.lang.String.format;
@@ -36,7 +37,7 @@ public class DivisionService extends GenericService {
         }
         Division division = mapper.toEntity(divisionDto);
         division.setCreatedBy(getCurrentUserAsEntity());
-        division.setStartDate(LocalDateTime.now());
+        division.setStartDate(LocalDate.now());
         division.setActive(true);
         return mapper.toDto(repository.save(division));
     }

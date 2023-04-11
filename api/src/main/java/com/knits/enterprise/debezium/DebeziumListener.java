@@ -1,5 +1,6 @@
 package com.knits.enterprise.debezium;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.knits.enterprise.service.company.EmployeeService;
 import io.debezium.config.Configuration;
 import io.debezium.embedded.Connect;
@@ -68,14 +69,25 @@ public class DebeziumListener {
                         .collect(toMap(Pair::getKey, Pair::getValue));
 
                 try {
-                    this.employeeService.replicateData(payload, operation);
-                } catch (ParseException e) {
+                    DebeziumChangeEvent<JsonNode, JsonNode> changeEvent = new DebeziumChangeEvent<>(
+                            sourceRecord.topic(),
+                            sourceRecord.kafkaPartition(),
+                            sourceRecord.keySchema(),
+                            sourceRecord.key(),
+                            sourceRecord.valueSchema(),
+                            objectMapper.readTree(objectMapper.writeValueAsString(payload)),
+                            sourceRecord.timestamp(),
+                            sourceRecord.headers()
+                    );
+
+                    processChangeData(changeEvent);
+                } catch (ParseException | JsonProcessingException e) {
                     throw new RuntimeException(e);
                 }
+
                 log.info("Updated Data: {} with Operation: {}", payload, operation.name());
             }
-        }
-    }
+        }}
 
     @PostConstruct
     private void start() {

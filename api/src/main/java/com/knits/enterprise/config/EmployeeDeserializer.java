@@ -50,7 +50,7 @@ public class EmployeeDeserializer extends JsonDeserializer<Employee> {
 
     private LocalDate deserializeLocalDate(JsonNode node, String fieldName) {
         LocalDate date = LocalDate.ofEpochDay(node.get(fieldName).asLong());
-        return LocalDate.parse(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        return LocalDate.parse(date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 }
 
